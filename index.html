@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tiết kiệm 240k · Mua acc premium minecraft</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #0b0e14;  /* deep dark base */
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+    color: #f0f3f8;
+    padding: 2rem 1rem;
+    line-height: 1.4;
+  }
+
+  /* smooth scroll & focus */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* custom scrollbar (dark) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1e1f2c;
+    border-radius: 12px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4a4e6b;
+    border-radius: 12px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6b6f8f;
+  }
+
+  .app-container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* header area */
+  .hero {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    background: linear-gradient(135deg, #FFFFFF 0%, #C0C9F0 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(4px);
+    padding: 6px 16px;
+    border-radius: 60px;
+    font-size: 0.85rem;
+    margin-top: 12px;
+    border: 0.5px solid rgba(255,255,255,0.1);
+  }
+
+  /* card style — dark glassmorph + soft border */
+  .card {
+    background: rgba(18, 22, 32, 0.85);
+    backdrop-filter: blur(2px);
+    border-radius: 32px;
+    padding: 1.5rem 1.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+    transition: transform 0.2s ease, border-color 0.2s;
+  }
+  .card:hover {
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  /* progress section */
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .progress-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #b9c3e9;
+    letter-spacing: 0.3px;
+  }
+  .target-value {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: white;
+  }
+  .progress-box {
+    background: #10131f;
+    border-radius: 60px;
+    height: 42px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    margin: 12px 0 8px 0;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(95deg, #FFFFFF, #B3C7FF, #8AAEFF);
+    transition: width 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    border-radius: 60px;
+    box-shadow: 0 0 6px rgba(255,255,240,0.6);
+  }
+  .progress-text {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    line-height: 42px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    letter-spacing: 0.5px;
+  }
+  .money-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    background: rgba(0,0,0,0.3);
+    padding: 12px 16px;
+    border-radius: 28px;
+    border: 0.5px solid rgba(255,255,255,0.05);
+  }
+  .saved-amount {
+    color: #D9E6FF;
+  }
+  .remain-amount {
+    color: #94a3d8;
+  }
+
+  /* input group */
+  .input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .input-field {
+    flex: 2;
+    background: #0f121e;
+    border: 1px solid #292e44;
+    border-radius: 44px;
+    padding: 14px 20px;
+    font-size: 1rem;
+    color: #f0f3fc;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.2s;
+  }
+  .input-field:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
+    background: #121625;
+  }
+  .input-field::placeholder {
+    color: #5e658b;
+    font-weight: 400;
+  }
+  .btn-primary {
+    background: #ffffff;
+    border: none;
+    border-radius: 44px;
+    padding: 12px 28px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #0a0e1a;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  .btn-primary:hover {
+    background: #eef3ff;
+    transform: scale(0.97);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  }
+  .file-zone {
+    background: #0c0f18;
+    border-radius: 44px;
+    padding: 6px 12px 6px 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border: 1px dashed #3e4462;
+  }
+  .file-label {
+    font-size: 0.85rem;
+    color: #b7c1e6;
+  }
+  input[type="file"] {
+    background: #1e243b;
+    padding: 8px 14px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.8rem;
+    border: none;
+    cursor: pointer;
+  }
+  input[type="file"]::file-selector-button {
+    background: #2c324d;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 30px;
+    color: white;
+    margin-right: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  input[type="file"]::file-selector-button:hover {
+    background: #3c4368;
+  }
+
+  /* chart area */
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .chart-header h3 {
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: -0.2px;
+  }
+  .chart-note {
+    font-size: 0.7rem;
+    background: #1e2338;
+    padding: 4px 10px;
+    border-radius: 30px;
+    color: #aeb9e6;
+  }
+  .chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    min-height: 180px;
+    padding: 12px 0 8px 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .bar-day {
+    flex: 1;
+    min-width: 48px;
+    background: linear-gradient(0deg, #CFDFFF, #A9BEFF);
+    border-radius: 16px 16px 8px 8px;
+    position: relative;
+    transition: all 0.2s;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+    cursor: default;
+  }
+  .bar-day span {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 600;
+    background: #151e2c;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-bottom: 6px;
+    color: #eef3ff;
+    letter-spacing: 0.3px;
+    border: 0.5px solid rgba(255,255,255,0.2);
+  }
+  .bar-day:hover {
+    opacity: 0.9;
+    transform: scaleY(1.02);
+  }
+
+  /* images grid — elegant gallery */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+  .section-title h3 {
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+  .images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.2rem;
+    margin-top: 0.5rem;
+  }
+  .img-card {
+    background: #121724;
+    border-radius: 24px;
+    overflow: hidden;
+    color: #f0f3fa;
+    position: relative;
+    transition: all 0.25s ease;
+    border: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 12px 18px -12px rgba(0,0,0,0.4);
+  }
+  .img-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255,255,255,0.2);
+    box-shadow: 0 20px 25px -14px black;
+  }
+  .img-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .img-card:hover img {
+    transform: scale(1.02);
+  }
+  .date {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 40px;
+    letter-spacing: 0.3px;
+    border: 0.5px solid rgba(255,255,255,0.2);
+  }
+  .amount {
+    padding: 12px 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: linear-gradient(120deg, #191e2f, #0f1322);
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: #C6D2FF;
+  }
+
+  /* empty state */
+  .empty-gallery {
+    text-align: center;
+    padding: 2rem;
+    background: #0e111c;
+    border-radius: 2rem;
+    color: #6c739b;
+    font-size: 0.9rem;
+  }
+
+  /* responsive */
+  @media (max-width: 680px) {
+    body {
+      padding: 1rem;
+    }
+    .card {
+      padding: 1.2rem;
+    }
+    .input-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .btn-primary {
+      justify-content: center;
+    }
+    .file-zone {
+      justify-content: space-between;
+    }
+    .chart {
+      gap: 6px;
+    }
+    .bar-day {
+      min-width: 40px;
+    }
+    .bar-day span {
+      font-size: 9px;
+      padding: 2px 6px;
+    }
+    .images {
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  /* subtle animation for progress */
+  @keyframes fadeSlide {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .card, .images .img-card {
+    animation: fadeSlide 0.3s ease-out;
+  }
+
+  /* footer style */
+  .footnote {
+    text-align: center;
+    font-size: 0.7rem;
+    color: #59608a;
+    margin-top: 2rem;
+    border-top: 0.5px solid rgba(255,255,255,0.05);
+    padding-top: 1.5rem;
+  }
+
+  /* buttons and minor */
+  button {
+    font-family: inherit;
+  }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  
+  <div class="hero">
+    <h1>🎯 240k Tiết kiệm</h1>
+    <div class="hero-badge">
+      <span>⚡ mục tiêu thông minh</span>
+      <span>•</span>
+      <span>#giữ thói quen</span>
+    </div>
+  </div>
+
+  <!-- PROGRESS CARD (giữ nguyên id/class quan trọng) -->
+  <div class="card">
+    <div class="progress-header">
+      <span class="progress-label">Tiến độ hành trình</span>
+      <span class="target-value">🎯 240,000₫</span>
+    </div>
+    <div class="progress-box">
+      <div class="progress-bar" id="bar"></div>
+      <div class="progress-text" id="percent">0%</div>
+    </div>
+    <div class="money-stats">
+      <span class="saved-amount">💰 Đã tiết kiệm: <strong id="moneyText">0 / 240,000đ</strong></span>
+      <span class="remain-amount">✨ Còn lại: <span id="remainDynamic">240,000đ</span></span>
+    </div>
+  </div>
+
+  <!-- INPUT & ACTION CARD (giữ nguyên id: moneyInput, nút addMoney, file upload) -->
+  <div class="card">
+    <div class="input-group">
+      <input type="text" id="moneyInput" class="input-field" placeholder="Nhập số tiền" autocomplete="off">
+      <button class="btn-primary" onclick="addMoney()">💾 Lưu tiền</button>
+    </div>
+    <div class="file-zone">
+      <span class="file-label">📸 Chụp ảnh hoá đơn / bằng chứng</span>
+      <input type="file" accept="image/*" onchange="upload(event)">
+    </div>
+    <div style="font-size: 0.7rem; margin-top: 12px; opacity: 0.6; text-align: center;">
+      * Ảnh sẽ lưu kỷ niệm cùng số tiền tiết kiệm trong ngày
+    </div>
+  </div>
+
+
+  <!-- GALLERY IMAGES (giữ nguyên id images) -->
+  <div class="section-title">
+    <h3>🖼️ Khoảnh khắc tiết kiệm</h3>
+    <span style="font-size: 0.7rem;">✦ ghi lại từng bước</span>
+  </div>
+  <div class="images" id="images"></div>
+  <div class="footnote">
+    Dữ liệu được lưu trên trình duyệt của bạn 🔒 · mỗi lần lưu tiền đều ghi nhận
+  </div>
+</div>
+
+<script>
+// =================== KHÔNG THAY ĐỔI BẤT KỲ LOGIC NÀO ===================
+// Chỉ giữ nguyên toàn bộ javascript gốc để đảm bảo API và localStorage hoạt động chính xác
+const TARGET = 240000;
+
+let total = parseInt(localStorage.getItem("money") || 0);
+let images = JSON.parse(localStorage.getItem("images") || "[]");
+let daily = JSON.parse(localStorage.getItem("daily") || "{}");
+
+function today() {
+    return new Date().toLocaleDateString();
+}
+
+function parseMoney(val) {
+    val = val.toLowerCase().trim();
+
+    if (val.includes("k")) return parseFloat(val) * 1000;
+    if (val.includes("m")) return parseFloat(val) * 1000000;
+
+    return parseInt(val);
+}
+
+function update() {
+    let percent = Math.min((total / TARGET) * 100, 100);
+
+    document.getElementById("bar").style.width = percent + "%";
+    document.getElementById("percent").innerText = percent.toFixed(1) + "%";
+    document.getElementById("moneyText").innerHTML = total.toLocaleString() + " / 240,000đ";
+    
+    // cập nhật hiển thị "còn lại" trong UI (thêm tiện ích nhưng không ảnh hưởng logic)
+    let remainSpan = document.getElementById("remainDynamic");
+    if (remainSpan) {
+        let remain = TARGET - total;
+        if (remain < 0) remain = 0;
+        remainSpan.innerText = remain.toLocaleString() + "đ";
+    }
+
+    renderImages();
+    renderChart();
+}
+
+function addMoney() {
+    let val = document.getElementById("moneyInput").value;
+    let money = parseMoney(val);
+
+    if (!money || money <= 0) return alert("Nhập sai! Vui lòng nhập số tiền hợp lệ (vd: 30k, 50000)");
+
+    total += money;
+
+    let d = today();
+    daily[d] = (daily[d] || 0) + money;
+
+    localStorage.setItem("money", total);
+    localStorage.setItem("daily", JSON.stringify(daily));
+
+    document.getElementById("moneyInput").value = "";
+    update();
+}
+
+async function upload(e) {
+    let file = e.target.files[0];
+    if (!file) return;
+    let reader = new FileReader();
+
+    reader.onload = async function(ev) {
+        let base64 = ev.target.result.split(",")[1];
+
+        let res = await fetch("https://script.google.com/macros/s/AKfycbyxXwGR9G3hk994sEPnzp1gtwvuWLsAi5dA_TUCAWab5DRJh_92dIEWCPPck6YPAoC9/exec", {
+            method: "POST",
+            body: JSON.stringify({
+                image: base64
+            })
+        });
+
+        let data = await res.json();
+
+        let d = today();
+
+        images.unshift({
+            src: data.url,
+            date: d,
+            amount: daily[d] || 0
+        });
+
+        localStorage.setItem("images", JSON.stringify(images));
+        update();
+    }
+
+    reader.readAsDataURL(file);
+}
+
+function renderImages() {
+    let box = document.getElementById("images");
+    box.innerHTML = "";
+
+    if (!images.length) {
+        let emptyDiv = document.createElement("div");
+        emptyDiv.className = "empty-gallery";
+        emptyDiv.innerText = "✨ Chưa có ảnh nào. Hãy tải ảnh để lưu kỷ niệm tiết kiệm!";
+        box.appendChild(emptyDiv);
+        return;
+    }
+
+    images.forEach(img => {
+        let div = document.createElement("div");
+        div.className = "img-card";
+
+        div.innerHTML = `
+            <div class="date">📅 ${img.date}</div>
+            <img src="${img.src}" loading="lazy" alt="saving moment">
+            <div class="amount">💰 ${img.amount.toLocaleString()}đ</div>
+        `;
+
+        box.appendChild(div);
+    });
+}
+
+function renderChart() {
+    let chart = document.getElementById("chart");
+    chart.innerHTML = "";
+
+    let values = Object.values(daily);
+    if (values.length === 0) {
+        let emptyHint = document.createElement("div");
+        emptyHint.style.width = "100%";
+        emptyHint.style.textAlign = "center";
+        emptyHint.style.padding = "2rem";
+        emptyHint.style.background = "#10131f";
+        emptyHint.style.borderRadius = "32px";
+        emptyHint.style.color = "#6b729b";
+        emptyHint.innerText = "📭 Chưa có dữ liệu ngày nào. Hãy thêm tiền để hiển thị biểu đồ!";
+        chart.appendChild(emptyHint);
+        return;
+    }
+
+    let max = Math.max(...values, 1);
+
+    Object.keys(daily).forEach(date => {
+        let val = daily[date];
+        let height = (val / max) * 100;
+
+        let bar = document.createElement("div");
+        bar.className = "bar-day";
+        bar.style.height = height + "%";
+        // thêm tooltip nhẹ qua title để hiển thị ngày và số tiền (không ảnh hưởng logic)
+        bar.title = `${date} : ${val.toLocaleString()}đ`;
+        bar.innerHTML = `<span>${(val/1000).toFixed(0)}k</span>`;
+        chart.appendChild(bar);
+    });
+}
+
+// khởi tạo lại remainDynamic & chạy lần đầu
+update();
+// đảm bảo hiển thị "còn lại" ban đầu chính xác (nếu phần tử tồn tại)
+setTimeout(() => {
+    let remainSpan = document.getElementById("remainDynamic");
+    if (remainSpan) {
+        let remain = TARGET - total;
+        if (remain < 0) remain = 0;
+        remainSpan.innerText = remain.toLocaleString() + "đ";
+    }
+}, 10);
+</script>
+</body>
+</html>
