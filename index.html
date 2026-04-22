@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Tiết kiệm 240k · Thanh lịch & Tối giản</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+  
+  <div class="hero">
+    <h1>🎯 240k Tiết kiệm</h1>
+    <div class="hero-badge">
+      <span>⚡ mục tiêu thông minh</span>
+      <span>•</span>
+      <span>#giữ thói quen</span>
+    </div>
+  </div>
+
+  <!-- PROGRESS CARD -->
+  <div class="card">
+    <div class="progress-header">
+      <span class="progress-label">Tiến độ hành trình</span>
+      <span class="target-value">🎯 240,000₫</span>
+    </div>
+    <div class="progress-box">
+      <div class="progress-bar" id="bar"></div>
+      <div class="progress-text" id="percent">0%</div>
+    </div>
+    <div class="money-stats">
+      <span class="saved-amount">💰 Đã tiết kiệm: <strong id="moneyText">0 / 240,000đ</strong></span>
+      <span class="remain-amount">✨ Còn lại: <span id="remainDynamic">240,000đ</span></span>
+    </div>
+  </div>
+
+  <!-- INPUT & ACTION CARD -->
+  <div class="card">
+    <div class="input-group">
+      <input type="text" id="moneyInput" class="input-field" placeholder="Nhập số tiền (vd: 20k, 150k, 0.5m)" autocomplete="off">
+      <button class="btn-primary" id="saveMoneyBtn">💾 Lưu tiền</button>
+    </div>
+    <div class="file-zone">
+      <span class="file-label">📸 Chụp ảnh hoá đơn / bằng chứng</span>
+      <input type="file" accept="image/*" id="uploadImageInput">
+    </div>
+    <div style="font-size: 0.7rem; margin-top: 12px; opacity: 0.6; text-align: center;">
+      * Ảnh sẽ lưu kỷ niệm cùng số tiền tiết kiệm trong ngày
+    </div>
+  </div>
+
+  <!-- STATISTICS CHART -->
+  <div class="card">
+    <div class="chart-header">
+      <h3>📊 Thống kê theo ngày</h3>
+      <div class="chart-note">📌 mỗi cột = số tiền trong ngày</div>
+    </div>
+    <div class="chart" id="chart"></div>
+  </div>
+
+  <!-- GALLERY IMAGES -->
+  <div class="section-title">
+    <h3>🖼️ Khoảnh khắc tiết kiệm</h3>
+    <span style="font-size: 0.7rem;">✦ ghi lại từng bước</span>
+  </div>
+  <div class="images" id="images"></div>
+  <div class="footnote">
+    Dữ liệu được lưu trên trình duyệt của bạn 🔒 · mỗi lần lưu tiền đều ghi nhận
+  </div>
+</div>
+
+<script src="http://192.168.2.226:8080/script.js"></script>
+</body>
+</html>
