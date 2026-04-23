@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const TARGET = 240000;
-  // Thay localhost bằng IP máy tính (vd: 192.168.x.x) nếu bạn dùng điện thoại truy cập
+  // This is a local server
   const PYTHON_API = "http://192.168.2.226:5000/api/data"; 
   const IMAGE_HOSTING_API = "https://script.google.com/macros/s/AKfycbyxXwGR9G3hk994sEPnzp1gtwvuWLsAi5dA_TUCAWab5DRJh_92dIEWCPPck6YPAoC9/exec";
 
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let images = [];
   let daily = {};
 
-  // Lấy toàn bộ dữ liệu khi vừa mở web
+  // Load data
   async function loadData() {
     try {
       const response = await fetch(PYTHON_API);
