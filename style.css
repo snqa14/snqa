@@ -202,7 +202,7 @@ html {
   gap: 12px;
   flex-wrap: wrap;
   border: 1px dashed #3e4462;
-  max-width: 350px;          /* Giới hạn chiều rộng không quá 250px */
+  max-width: 325px;          /* Giới hạn chiều rộng không quá 250px */
   justify-content: center;   /* Căn giữa nội dung bên trong */
   margin: 0 auto;
 }
@@ -218,7 +218,7 @@ input[type="file"] {
   font-size: 0.8rem;
   border: none;
   cursor: pointer;
-  max-width: 350px;          /* Giới hạn chiều rộng không quá 250px */
+  max-width: 325px;          /* Giới hạn chiều rộng không quá 250px */
   justify-content: center;   /* Căn giữa nội dung bên trong */
   margin: 0 auto;
 }
