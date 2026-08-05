@@ -2,14 +2,27 @@
 /**
  * File-based API for shared VPS hosting.
  *
+
+ * Deploy this file together with index.html, script.js, style.css, data.json,
+ * and the uploads directory. It avoids a long-running Python process while
+ * preserving the same JSON shape.
+
  * Deploy this file together with index.html, script.js, style.css, and data.json.
  * It avoids a long-running Python process while preserving the same JSON shape.
+
  */
 
 declare(strict_types=1);
 
 const TARGET = 240000;
+
+const MAX_IMAGE_BYTES = 5242880;
+
 $dataFile = __DIR__ . DIRECTORY_SEPARATOR . 'data.json';
+$uploadDir = __DIR__ . DIRECTORY_SEPARATOR . 'uploads';
+=======
+$dataFile = __DIR__ . DIRECTORY_SEPARATOR . 'data.json';
+
 $defaultData = [
     'money' => 0,
     'images' => [],
@@ -80,6 +93,72 @@ function writeData(string $dataFile, array $data): void
     }
 }
 
+
+function publicBaseUrl(): string
+{
+    $https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+    $scheme = $https ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $scriptDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+
+    return $scheme . '://' . $host . ($scriptDir === '' ? '' : $scriptDir);
+}
+
+function saveImageToVps(array $payload, string $uploadDir): array
+{
+    $rawImage = (string)($payload['image'] ?? '');
+    if ($rawImage === '') {
+        sendJson(['ok' => false, 'error' => 'Thiếu dữ liệu ảnh.'], 400);
+    }
+
+    $mimeType = (string)($payload['type'] ?? '');
+    if (preg_match('/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/', $rawImage, $matches) === 1) {
+        $mimeType = $matches[1];
+        $rawImage = $matches[2];
+    }
+
+    $allowedExtensions = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp',
+        'image/gif' => 'gif',
+    ];
+
+    if (!isset($allowedExtensions[$mimeType])) {
+        sendJson(['ok' => false, 'error' => 'Chỉ hỗ trợ ảnh JPG, PNG, WEBP hoặc GIF.'], 400);
+    }
+
+    $binary = base64_decode($rawImage, true);
+    if ($binary === false) {
+        sendJson(['ok' => false, 'error' => 'Dữ liệu ảnh base64 không hợp lệ.'], 400);
+    }
+
+    if (strlen($binary) > MAX_IMAGE_BYTES) {
+        sendJson(['ok' => false, 'error' => 'Ảnh vượt quá giới hạn 5MB.'], 413);
+    }
+
+    $detectedMime = (new finfo(FILEINFO_MIME_TYPE))->buffer($binary);
+    if (!isset($allowedExtensions[$detectedMime])) {
+        sendJson(['ok' => false, 'error' => 'File tải lên không phải ảnh hợp lệ.'], 400);
+    }
+
+    if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {
+        sendJson(['ok' => false, 'error' => 'Không tạo được thư mục uploads.'], 500);
+    }
+
+    $filename = date('Ymd-His') . '-' . bin2hex(random_bytes(6)) . '.' . $allowedExtensions[$detectedMime];
+    $path = $uploadDir . DIRECTORY_SEPARATOR . $filename;
+    if (file_put_contents($path, $binary, LOCK_EX) === false) {
+        sendJson(['ok' => false, 'error' => 'Không lưu được ảnh lên VPS.'], 500);
+    }
+
+    return [
+        'url' => publicBaseUrl() . '/uploads/' . rawurlencode($filename),
+        'path' => 'uploads/' . $filename,
+    ];
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     sendJson(new stdClass(), 204);
 }
@@ -93,6 +172,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (json_last_error() !== JSON_ERROR_NONE) {
         sendJson(['ok' => false, 'error' => 'JSON không hợp lệ.'], 400);
     }
+
+
+    if (($_GET['action'] ?? '') === 'upload-image') {
+        sendJson(['ok' => true, 'image' => saveImageToVps($payload, $uploadDir)]);
+    }
+
 
     $cleaned = normalizeData($payload);
     writeData($dataFile, $cleaned);

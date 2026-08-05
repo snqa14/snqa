@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     `${window.location.origin}/api.php`,
     `${window.location.origin}/api/data`,
   ];
+
+  const VPS_IMAGE_API = `${window.location.origin}/api.php?action=upload-image`;
+
   const IMAGE_HOSTING_API = "https://script.google.com/macros/s/AKfycbyxXwGR9G3hk994sEPnzp1gtwvuWLsAi5dA_TUCAWab5DRJh_92dIEWCPPck6YPAoC9/exec";
+
 
   let total = 0;
   let images = [];
@@ -174,29 +178,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     let reader = new FileReader();
     reader.onload = async function(ev) {
       try {
-        let base64 = ev.target.result.split(",")[1];
-        
-        // 1. Gửi ảnh lên Google Apps Script (Giữ nguyên API của bạn)
-        let res = await fetch(IMAGE_HOSTING_API, {
+        const uploadResult = await requestJson(VPS_IMAGE_API, {
           method: "POST",
-          body: JSON.stringify({ image: base64 })
+          body: JSON.stringify({
+            image: ev.target.result,
+            type: file.type
+          })
         });
-        let data = await res.json();
-        
-        // 2. Sau khi có link ảnh, thêm vào mảng images
+
+        // Ảnh được lưu trong thư mục uploads trên VPS, sau đó link ảnh được ghi vào data.json.
         let d = today();
         images.unshift({
-          src: data.url,
+          src: uploadResult.image.url,
+          path: uploadResult.image.path,
           date: d,
           amount: daily[d] || 0
         });
 
+
+        // Đồng bộ toàn bộ dữ liệu mới lên VPS
+
         // 3. Đồng bộ toàn bộ dữ liệu mới lên VPS
+
         updateUI();
         await syncServer();
         
       } catch (err) {
-        alert("Lỗi upload ảnh!");
+        alert("Lỗi upload ảnh lên VPS!");
         console.error(err);
       } finally {
         label.innerText = originalText;
