@@ -2,18 +2,27 @@
 /**
  * File-based API for shared VPS hosting.
  *
+
  * Deploy this file together with index.html, script.js, style.css, data.json,
  * and the uploads directory. It avoids a long-running Python process while
  * preserving the same JSON shape.
+
+ * Deploy this file together with index.html, script.js, style.css, and data.json.
+ * It avoids a long-running Python process while preserving the same JSON shape.
+
  */
 
 declare(strict_types=1);
 
 const TARGET = 240000;
+
 const MAX_IMAGE_BYTES = 5242880;
 
 $dataFile = __DIR__ . DIRECTORY_SEPARATOR . 'data.json';
 $uploadDir = __DIR__ . DIRECTORY_SEPARATOR . 'uploads';
+=======
+$dataFile = __DIR__ . DIRECTORY_SEPARATOR . 'data.json';
+
 $defaultData = [
     'money' => 0,
     'images' => [],
@@ -84,6 +93,7 @@ function writeData(string $dataFile, array $data): void
     }
 }
 
+
 function publicBaseUrl(): string
 {
     $https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
@@ -148,6 +158,7 @@ function saveImageToVps(array $payload, string $uploadDir): array
     ];
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     sendJson(new stdClass(), 204);
 }
@@ -162,9 +173,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sendJson(['ok' => false, 'error' => 'JSON không hợp lệ.'], 400);
     }
 
+
     if (($_GET['action'] ?? '') === 'upload-image') {
         sendJson(['ok' => true, 'image' => saveImageToVps($payload, $uploadDir)]);
     }
+
 
     $cleaned = normalizeData($payload);
     writeData($dataFile, $cleaned);

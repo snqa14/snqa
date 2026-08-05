@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     `${window.location.origin}/api.php`,
     `${window.location.origin}/api/data`,
   ];
+
   const VPS_IMAGE_API = `${window.location.origin}/api.php?action=upload-image`;
+
+  const IMAGE_HOSTING_API = "https://script.google.com/macros/s/AKfycbyxXwGR9G3hk994sEPnzp1gtwvuWLsAi5dA_TUCAWab5DRJh_92dIEWCPPck6YPAoC9/exec";
+
 
   let total = 0;
   let images = [];
@@ -191,7 +195,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           amount: daily[d] || 0
         });
 
+
         // Đồng bộ toàn bộ dữ liệu mới lên VPS
+
+        // 3. Đồng bộ toàn bộ dữ liệu mới lên VPS
+
         updateUI();
         await syncServer();
         
