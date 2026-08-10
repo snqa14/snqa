@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const TARGET = 240000;
+<
+  const API_ENDPOINT = `${window.location.origin}/api/data`;
+  const IMAGE_UPLOAD_API = `${window.location.origin}/api/upload-image`;
+
   const API_ENDPOINTS = [
     `${window.location.origin}/api.php`,
     `${window.location.origin}/api/data`,
@@ -8,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const VPS_IMAGE_API = `${window.location.origin}/api.php?action=upload-image`;
 
   const IMAGE_HOSTING_API = "https://script.google.com/macros/s/AKfycbyxXwGR9G3hk994sEPnzp1gtwvuWLsAi5dA_TUCAWab5DRJh_92dIEWCPPck6YPAoC9/exec";
+
 
 
   let total = 0;
@@ -32,6 +37,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     return response.json();
   }
 
+
+  async function requestJson(endpoint, options = {}) {
+    const response = await fetch(endpoint, {
+      cache: "no-store",
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...(options.headers || {}),
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`API lỗi ${response.status}`);
+    }
+
+    return response.json();
+  }
+
+  // Load dữ liệu từ route Python. Nếu server lỗi thì dùng tạm localStorage.
+  async function loadData() {
+    try {
+      const data = await requestJson(API_ENDPOINT);
+
+      total = data.money || 0;
+      images = data.images || [];
+      daily = data.daily || {};
+
+      updateUI();
+    } catch (error) {
+      console.error("Không kết nối được API Python, chuyển sang localStorage.", error);
+      total = parseInt(localStorage.getItem("money") || 0, 10);
+      images = JSON.parse(localStorage.getItem("images") || "[]");
+      daily = JSON.parse(localStorage.getItem("daily") || "{}");
+      updateUI();
+
   // Load dữ liệu từ API lưu trên VPS. Nếu VPS chưa cấu hình API thì dùng tạm localStorage.
   async function loadData() {
     const endpoints = [activeApiEndpoint, ...API_ENDPOINTS].filter(
@@ -53,6 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       } catch (error) {
         console.warn(`Không đọc được dữ liệu từ ${endpoint}:`, error);
       }
+
     }
 
     console.error("Không kết nối được API VPS, chuyển sang localStorage.");
@@ -62,7 +103,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateUI();
   }
 
+
+  // Gửi dữ liệu mới lên route Python. Đồng thời giữ localStorage làm bản dự phòng.
+
   // Gửi dữ liệu mới lên API lưu trên VPS. Đồng thời giữ localStorage làm bản dự phòng.
+
   async function syncServer() {
     const payload = {
       money: total,
@@ -73,6 +118,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     localStorage.setItem("money", String(total));
     localStorage.setItem("images", JSON.stringify(images));
     localStorage.setItem("daily", JSON.stringify(daily));
+
+
+    try {
+      return await requestJson(API_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+    } catch (error) {
+      console.warn("Không thể đồng bộ tới API Python:", error);
 
     const endpoints = [activeApiEndpoint, ...API_ENDPOINTS].filter(
       (endpoint, index, all) => all.indexOf(endpoint) === index
@@ -90,6 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       } catch (error) {
         console.warn(`Không thể đồng bộ tới ${endpoint}:`, error);
       }
+
     }
   }
 
@@ -162,7 +217,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (inputEl) inputEl.value = "";
     
     updateUI();
+
+    await syncServer(); // Đồng bộ ngay lên server Python
+
     await syncServer(); // Đồng bộ ngay lên VPS
+
   }
 
   // Xử lý khi chọn ảnh
@@ -178,21 +237,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     let reader = new FileReader();
     reader.onload = async function(ev) {
       try {
+
+        const uploadResult = await requestJson(IMAGE_UPLOAD_API, {
+
         const uploadResult = await requestJson(VPS_IMAGE_API, {
+
           method: "POST",
           body: JSON.stringify({
             image: ev.target.result,
             type: file.type
           })
-        });
-
-        // Ảnh được lưu trong thư mục uploads trên VPS, sau đó link ảnh được ghi vào data.json.
-        let d = today();
-        images.unshift({
-          src: uploadResult.image.url,
-          path: uploadResult.image.path,
-          date: d,
-          amount: daily[d] || 0
         });
 
 
@@ -204,7 +258,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         await syncServer();
         
       } catch (err) {
+
+        alert("Lỗi upload ảnh lên server Python!");
+
         alert("Lỗi upload ảnh lên VPS!");
+
         console.error(err);
       } finally {
         label.innerText = originalText;
@@ -222,6 +280,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const fileInput = document.getElementById("uploadImageInput");
   if (fileInput) fileInput.addEventListener("change", uploadHandler);
 
+
+  // Chạy lần đầu để load dữ liệu từ route Python
+
   // Chạy lần đầu để load dữ liệu từ API VPS
+
   loadData();
 });
